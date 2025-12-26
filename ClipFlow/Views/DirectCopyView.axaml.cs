@@ -38,7 +38,7 @@ public partial class DirectCopyView : UserControl
 
     private async Task<IEnumerable<IStorageItem>> GetStorageItems(DragEventArgs e)
     {
-        var files = e.Data.GetFiles();
+        var files = e.Data.GetFiles(); 
         if (files != null) return files;
         return [];
     }

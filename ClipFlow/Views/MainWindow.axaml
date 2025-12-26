@@ -8,6 +8,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="{loc:Translate program.title}"
         Width="700" Height="550"
+        MinWidth="500" MinHeight="400"
         ExtendClientAreaToDecorationsHint="True"
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent">
@@ -15,14 +16,20 @@
     <Panel>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial BackgroundSource="Digger" TintColor="Black" TintOpacity="0.8" MaterialOpacity="0.65" />
+                <ExperimentalAcrylicMaterial BackgroundSource="Digger" 
+                                             TintColor="Black" 
+                                             TintOpacity="0.8" 
+                                             MaterialOpacity="0.65" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
 
         <Grid RowDefinitions="30, *">
             <!-- Title Bar -->
             <TextBlock Text="{loc:Translate program.title}" 
-                       IsHitTestVisible="False" VerticalAlignment="Center" Margin="15,0" FontWeight="SemiBold"/>
+                       IsHitTestVisible="False" 
+                       VerticalAlignment="Center" 
+                       Margin="15,0" 
+                       FontWeight="SemiBold"/>
 
             <!-- Main Content -->
             <TabControl Grid.Row="1" Margin="0,5,0,0" Padding="0">

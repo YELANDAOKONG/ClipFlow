@@ -1,16 +1,22 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
+using ClipFlow.Localization;
+using ClipFlow.Services;
 using ClipFlow.ViewModels;
 using ClipFlow.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ClipFlow;
 
 public partial class App : Application
 {
+    public static IServiceProvider? ServiceProvider { get; private set; }
+    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -18,14 +24,24 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var services = new ServiceCollection();
+        ConfigureServices(services);
+        ServiceProvider = services.BuildServiceProvider();
+        
+        var configService = GetService<ConfigureService>();
+        configService.Load(); 
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-            // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = GetService<MainWindowViewModel>(),
+            };
+            
+            desktop.Exit += async (sender, args) => 
+            {
+                await configService.SaveAsync();
             };
         }
 
@@ -43,5 +59,24 @@ public partial class App : Application
         {
             BindingPlugins.DataValidators.Remove(plugin);
         }
+    }
+
+    private void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton(sp => new ConfigureService(null));
+        services.AddSingleton<LocalizationService>();
+        services.AddSingleton<ThemeService>();
+        
+        services.AddTransient<MainWindowViewModel>(); 
+    }
+
+    public static T GetService<T>() where T : class
+    {
+        var result = ServiceProvider?.GetService<T>();
+        if (result == null)
+        {
+            throw new InvalidOperationException($"Service of type {typeof(T)} could not be found.");
+        }
+        return result;
     }
 }

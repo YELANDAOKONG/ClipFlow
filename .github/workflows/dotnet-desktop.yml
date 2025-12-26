@@ -6,7 +6,23 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+            artifact-name: ClipFlow-Windows-x64
+          - os: ubuntu-latest
+            rid: linux-x64
+            artifact-name: ClipFlow-Linux-x64
+          - os: macos-latest
+            rid: osx-x64
+            artifact-name: ClipFlow-macOS-x64
+          - os: macos-latest
+            rid: osx-arm64
+            artifact-name: ClipFlow-macOS-ARM64
+    
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout
@@ -26,10 +42,10 @@ jobs:
       run: dotnet build ClipFlow.sln --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish ClipFlow/ClipFlow.csproj --configuration Release --no-build --output ./publish
+      run: dotnet publish ClipFlow/ClipFlow.csproj --configuration Release --no-build --runtime ${{ matrix.rid }} --self-contained false --output ./publish
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: ClipFlow-Release
+        name: ${{ matrix.artifact-name }}
         path: ./publish

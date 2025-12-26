@@ -6,12 +6,12 @@
              xmlns:loc="using:ClipFlow.Localization"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="ClipFlow.Views.DirectCopyView"
-             x:DataType="vm:DirectCopyViewModel">
+             x:DataType="vm:DirectCopyViewModel"
+             DragDrop.AllowDrop="True">
 
     <Grid RowDefinitions="*,Auto">
         <!-- Drop Zone -->
         <Border Classes="DropZone" 
-                DragDrop.AllowDrop="True"
                 Margin="10">
             <Grid RowDefinitions="*,Auto">
                 <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="15">

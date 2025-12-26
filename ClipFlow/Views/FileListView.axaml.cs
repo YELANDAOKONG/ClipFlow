@@ -1,8 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Platform.Storage;
 using ClipFlow.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ClipFlow.Views;
@@ -18,7 +16,14 @@ public partial class FileListView : UserControl
 
     private void DragOver(object? sender, DragEventArgs e)
     {
-        e.DragEffects = DragDropEffects.Copy;
+        if (e.DataTransfer.Contains(DataFormat.File))
+        {
+            e.DragEffects = DragDropEffects.Copy;
+        }
+        else
+        {
+            e.DragEffects = DragDropEffects.None;
+        }
         e.Handled = true;
     }
 

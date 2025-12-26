@@ -3,7 +3,8 @@
              xmlns:vm="using:ClipFlow.ViewModels"
              xmlns:loc="using:ClipFlow.Localization"
              x:Class="ClipFlow.Views.FileListView"
-             x:DataType="vm:FileListViewModel">
+             x:DataType="vm:FileListViewModel"
+             DragDrop.AllowDrop="True">
 
     <Grid RowDefinitions="*,Auto,Auto" Margin="10">
         <TextBox Grid.Row="0" 
@@ -11,8 +12,7 @@
                  AcceptsReturn="True"
                  TextWrapping="NoWrap"
                  Watermark="{Binding StatusMessage}"
-                 FontFamily="Consolas, Monospace"
-                 DragDrop.AllowDrop="True"/>
+                 FontFamily="Consolas, Monospace"/>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" Margin="0,10" HorizontalAlignment="Right">
             <Button Content="{loc:Translate btn.clear}" 

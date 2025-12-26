@@ -11,8 +11,18 @@ public partial class ApplicationConfigure : ObservableObject
     private ApplicationTheme _theme = ApplicationTheme.System;
 
     [ObservableProperty]
-    private WindowBackdropType _backdropType = WindowBackdropType.Blur;
+    private WindowBackdropType _backdropType = WindowBackdropType.Mica;
 
     [ObservableProperty]
-    private double _windowOpacity = 1.0;
+    private double _windowOpacity = 0.95;
+
+    // Copy functionality
+    [ObservableProperty]
+    private bool _includeFilePaths = true;
+
+    [ObservableProperty]
+    private bool _appendToClipboard = false;
+
+    [ObservableProperty]
+    private int _backtickCount = 3;
 }

@@ -1,3 +1,26 @@
 {
-  "program.title": "ClipFlow"
+  "program.title": "ClipFlow",
+  "tab.direct": "直接复制",
+  "tab.list": "列表复制",
+  "tab.settings": "设置",
+  "group.options": "选项",
+  "opt.include_path": "包含文件路径",
+  "opt.append_clipboard": "追加到剪贴板",
+  "opt.backticks": "反引号数量:",
+  "status.ready": "就绪",
+  "status.drag_drop": "拖拽文件到此处以复制内容",
+  "status.drag_list": "拖拽文件列表或粘贴路径",
+  "status.success": "已复制 {0} 个文件到剪贴板",
+  "status.error": "错误: {0}",
+  "status.no_files": "未找到有效文件",
+  "status.list_empty": "文件列表为空",
+  "status.cleared": "列表已清空",
+  "btn.copy": "复制内容",
+  "btn.clear": "清空列表",
+  "recent.title": "最近文件",
+  "recent.clear": "清空记录",
+  "settings.theme": "主题",
+  "settings.language": "语言",
+  "settings.backdrop": "窗口特效",
+  "settings.opacity": "不透明度"
 }

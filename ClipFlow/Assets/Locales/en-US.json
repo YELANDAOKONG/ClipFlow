@@ -1,3 +1,26 @@
 {
-  "program.title": "ClipFlow"
+  "program.title": "ClipFlow",
+  "tab.direct": "Direct Copy",
+  "tab.list": "File List",
+  "tab.settings": "Settings",
+  "group.options": "Options",
+  "opt.include_path": "Include File Path",
+  "opt.append_clipboard": "Append to Clipboard",
+  "opt.backticks": "Backticks Count:",
+  "status.ready": "Ready",
+  "status.drag_drop": "Drag files here to copy content",
+  "status.drag_list": "Drag file list here or paste paths",
+  "status.success": "Copied {0} files to clipboard",
+  "status.error": "Error: {0}",
+  "status.no_files": "No valid files found",
+  "status.list_empty": "File list is empty",
+  "status.cleared": "List cleared",
+  "btn.copy": "Copy Content",
+  "btn.clear": "Clear List",
+  "recent.title": "Recent Files",
+  "recent.clear": "Clear History",
+  "settings.theme": "Theme",
+  "settings.language": "Language",
+  "settings.backdrop": "Window Effect",
+  "settings.opacity": "Opacity"
 }

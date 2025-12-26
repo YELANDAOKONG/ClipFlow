@@ -5,6 +5,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
+using ClipFlow.Interfaces;
 using ClipFlow.Localization;
 using ClipFlow.Services;
 using ClipFlow.ViewModels;
@@ -63,10 +64,15 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
+        // Core Services
         services.AddSingleton(sp => new ConfigureService(null));
         services.AddSingleton<LocalizationService>();
         services.AddSingleton<ThemeService>();
-        
+        services.AddSingleton<IClipboardService, ClipboardService>();
+    
+        // ViewModels
+        services.AddTransient<DirectCopyViewModel>();
+        services.AddTransient<FileListViewModel>();
         services.AddTransient<MainWindowViewModel>(); 
     }
 

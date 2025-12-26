@@ -60,7 +60,8 @@ public class WindowBase : Window
         if (type == WindowBackdropType.None)
         {
             TransparencyLevelHint = [WindowTransparencyLevel.None];
-            Background = null;
+            // Background = null;
+            // Background = Brushes.Transparent;
         }
         else
         {

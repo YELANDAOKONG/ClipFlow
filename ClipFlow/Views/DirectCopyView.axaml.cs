@@ -4,7 +4,6 @@ using Avalonia.Platform.Storage;
 using ClipFlow.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ClipFlow.Views;
 
@@ -27,19 +26,12 @@ public partial class DirectCopyView : UserControl
     {
         if (DataContext is DirectCopyViewModel vm)
         {
-            var items = await GetStorageItems(e);
-            if (items.Any())
+            var files = e.DataTransfer.TryGetFiles();
+            if (files != null && files.Any())
             {
-                await vm.HandleDropCommand.ExecuteAsync(items);
+                await vm.HandleDropCommand.ExecuteAsync(files.ToList());
             }
         }
         e.Handled = true;
-    }
-
-    private async Task<IEnumerable<IStorageItem>> GetStorageItems(DragEventArgs e)
-    {
-        var files = e.Data.GetFiles(); 
-        if (files != null) return files;
-        return [];
     }
 }

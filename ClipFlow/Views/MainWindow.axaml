@@ -9,103 +9,116 @@
         Title="{loc:Translate program.title}"
         Width="700" Height="550"
         MinWidth="500" MinHeight="400"
-        ExtendClientAreaToDecorationsHint="True"
-        TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent">
+        ExtendClientAreaToDecorationsHint="True">
 
-    <Panel>
-        <ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial BackgroundSource="Digger" 
-                                             TintColor="Black" 
-                                             TintOpacity="0.8" 
-                                             MaterialOpacity="0.65" />
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
+    <Grid RowDefinitions="30, *">
+        <!-- Title Bar -->
+        <TextBlock Text="{loc:Translate program.title}" 
+                   IsHitTestVisible="False" 
+                   VerticalAlignment="Center" 
+                   Margin="15,0" 
+                   FontWeight="SemiBold"/>
 
-        <Grid RowDefinitions="30, *">
-            <!-- Title Bar -->
-            <TextBlock Text="{loc:Translate program.title}" 
-                       IsHitTestVisible="False" 
-                       VerticalAlignment="Center" 
-                       Margin="15,0" 
-                       FontWeight="SemiBold"/>
-
-            <!-- Main Content -->
-            <TabControl Grid.Row="1" Margin="0,5,0,0" Padding="0">
-                <!-- Tab 1: Direct Copy -->
-                <TabItem Header="{loc:Translate tab.direct}">
-                    <Grid ColumnDefinitions="*, 250">
-                        <v:DirectCopyView DataContext="{Binding DirectCopyVm}" />
-                        
-                        <!-- Side Settings Panel -->
-                        <Border Grid.Column="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="1,0,0,0" Padding="15">
-                            <StackPanel Spacing="15">
-                                <TextBlock Text="{loc:Translate group.options}" FontWeight="Bold"/>
-                                
-                                <ToggleSwitch Content="{loc:Translate opt.include_path}" 
-                                              IsChecked="{Binding Config.IncludeFilePaths}"/>
-                                
-                                <ToggleSwitch Content="{loc:Translate opt.append_clipboard}" 
-                                              IsChecked="{Binding Config.AppendToClipboard}"/>
-                                
-                                <StackPanel>
-                                    <TextBlock Text="{loc:Translate opt.backticks}"/>
-                                    <NumericUpDown Value="{Binding Config.BacktickCount}" Minimum="3" Maximum="20" FormatString="0"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </TabItem>
-
-                <!-- Tab 2: File List -->
-                <TabItem Header="{loc:Translate tab.list}">
-                    <Grid ColumnDefinitions="*, 250">
-                        <v:FileListView DataContext="{Binding FileListVm}" />
-                        <!-- Shared Settings Panel -->
-                        <Border Grid.Column="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="1,0,0,0" Padding="15">
-                            <StackPanel Spacing="15">
-                                <TextBlock Text="{loc:Translate group.options}" FontWeight="Bold"/>
-                                <ToggleSwitch Content="{loc:Translate opt.include_path}" 
-                                              IsChecked="{Binding Config.IncludeFilePaths}"/>
-                                <ToggleSwitch Content="{loc:Translate opt.append_clipboard}" 
-                                              IsChecked="{Binding Config.AppendToClipboard}"/>
-                                <StackPanel>
-                                    <TextBlock Text="{loc:Translate opt.backticks}"/>
-                                    <NumericUpDown Value="{Binding Config.BacktickCount}" Minimum="3" Maximum="20" FormatString="0"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </TabItem>
-
-                <!-- Tab 3: App Settings -->
-                <TabItem Header="{loc:Translate tab.settings}">
-                    <ScrollViewer>
-                        <StackPanel Margin="20" Spacing="20" MaxWidth="500" HorizontalAlignment="Left">
-                            <StackPanel Spacing="10">
-                                <TextBlock Text="{loc:Translate settings.language}" FontWeight="Bold"/>
-                                <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding Config.Language}" HorizontalAlignment="Stretch"/>
-                            </StackPanel>
-
-                            <StackPanel Spacing="10">
-                                <TextBlock Text="{loc:Translate settings.theme}" FontWeight="Bold"/>
-                                <ComboBox ItemsSource="{Binding Themes}" SelectedItem="{Binding Config.Theme}" HorizontalAlignment="Stretch"/>
-                            </StackPanel>
-
-                            <StackPanel Spacing="10">
-                                <TextBlock Text="{loc:Translate settings.backdrop}" FontWeight="Bold"/>
-                                <ComboBox ItemsSource="{Binding BackdropTypes}" SelectedItem="{Binding Config.BackdropType}" HorizontalAlignment="Stretch"/>
-                            </StackPanel>
-
-                            <StackPanel Spacing="10">
-                                <TextBlock Text="{loc:Translate settings.opacity}" FontWeight="Bold"/>
-                                <Slider Value="{Binding Config.WindowOpacity}" Minimum="0.5" Maximum="1.0" TickFrequency="0.05" IsSnapToTickEnabled="True"/>
+        <!-- Main Content -->
+        <TabControl Grid.Row="1" Margin="0,5,0,0" Padding="0">
+            <!-- Tab 1: Direct Copy -->
+            <TabItem Header="{loc:Translate tab.direct}">
+                <Grid ColumnDefinitions="*, 250">
+                    <v:DirectCopyView DataContext="{Binding DirectCopyVm}" />
+                    
+                    <!-- Side Settings Panel -->
+                    <Border Grid.Column="1" 
+                            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
+                            BorderThickness="1,0,0,0" 
+                            Padding="15">
+                        <StackPanel Spacing="15">
+                            <TextBlock Text="{loc:Translate group.options}" FontWeight="Bold"/>
+                            
+                            <ToggleSwitch Content="{loc:Translate opt.include_path}" 
+                                          IsChecked="{Binding Config.IncludeFilePaths}"/>
+                            
+                            <ToggleSwitch Content="{loc:Translate opt.append_clipboard}" 
+                                          IsChecked="{Binding Config.AppendToClipboard}"/>
+                            
+                            <StackPanel>
+                                <TextBlock Text="{loc:Translate opt.backticks}"/>
+                                <NumericUpDown Value="{Binding Config.BacktickCount}" 
+                                               Minimum="3" 
+                                               Maximum="20" 
+                                               FormatString="0"/>
                             </StackPanel>
                         </StackPanel>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
-        </Grid>
-    </Panel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Tab 2: File List -->
+            <TabItem Header="{loc:Translate tab.list}">
+                <Grid ColumnDefinitions="*, 250">
+                    <v:FileListView DataContext="{Binding FileListVm}" />
+                    
+                    <!-- Shared Settings Panel -->
+                    <Border Grid.Column="1" 
+                            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
+                            BorderThickness="1,0,0,0" 
+                            Padding="15">
+                        <StackPanel Spacing="15">
+                            <TextBlock Text="{loc:Translate group.options}" FontWeight="Bold"/>
+                            <ToggleSwitch Content="{loc:Translate opt.include_path}" 
+                                          IsChecked="{Binding Config.IncludeFilePaths}"/>
+                            <ToggleSwitch Content="{loc:Translate opt.append_clipboard}" 
+                                          IsChecked="{Binding Config.AppendToClipboard}"/>
+                            <StackPanel>
+                                <TextBlock Text="{loc:Translate opt.backticks}"/>
+                                <NumericUpDown Value="{Binding Config.BacktickCount}" 
+                                               Minimum="3" 
+                                               Maximum="20" 
+                                               FormatString="0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Tab 3: App Settings -->
+            <TabItem Header="{loc:Translate tab.settings}">
+                <ScrollViewer>
+                    <StackPanel Margin="20" Spacing="20" MaxWidth="500" HorizontalAlignment="Left">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{loc:Translate settings.language}" FontWeight="Bold"/>
+                            <ComboBox ItemsSource="{Binding Languages}" 
+                                      SelectedItem="{Binding Config.Language}" 
+                                      HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{loc:Translate settings.theme}" FontWeight="Bold"/>
+                            <ComboBox ItemsSource="{Binding Themes}" 
+                                      SelectedItem="{Binding Config.Theme}" 
+                                      HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{loc:Translate settings.backdrop}" FontWeight="Bold"/>
+                            <ComboBox ItemsSource="{Binding BackdropTypes}" 
+                                      SelectedItem="{Binding Config.BackdropType}" 
+                                      HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{loc:Translate settings.opacity}" FontWeight="Bold"/>
+                            <Slider Value="{Binding Config.WindowOpacity}" 
+                                    Minimum="0.5" 
+                                    Maximum="1.0" 
+                                    TickFrequency="0.05" 
+                                    IsSnapToTickEnabled="True"/>
+                            <TextBlock Text="{Binding Config.WindowOpacity, StringFormat='{}{0:P0}'}" 
+                                       HorizontalAlignment="Right" 
+                                       Opacity="0.6"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </Window>

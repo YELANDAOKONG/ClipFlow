@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using ClipFlow.ViewModels;
 using System.Linq;
 
@@ -10,8 +11,8 @@ public partial class DirectCopyView : UserControl
     public DirectCopyView()
     {
         InitializeComponent();
-        AddHandler(DragDrop.DragOverEvent, DragOver);
-        AddHandler(DragDrop.DropEvent, Drop);
+        AddHandler(DragDrop.DragOverEvent, DragOver, RoutingStrategies.Tunnel);
+        AddHandler(DragDrop.DropEvent, Drop, RoutingStrategies.Tunnel);
     }
 
     private void DragOver(object? sender, DragEventArgs e)
